@@ -1,0 +1,52 @@
+{
+    "name": "Typeform",
+    "description": "Build conversational forms, surveys, quizzes, landing pages, and more. Typeforms are easy to make and refreshing to take. Try it FREE ??? no coding required.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28236-developer-typeform-com.jpg",
+    "tags": [
+        "have api",
+        "surveys"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/typeform\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Typeform",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28236-developer-typeform-com.jpg",
+            "humanURL": "https:\/\/typeform.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/typeform-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/typeform-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/typeform"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/typeform"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/developer.typeform.com"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/typeform.com"
+        }
+    ]
+}
