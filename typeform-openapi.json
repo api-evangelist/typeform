@@ -3,13 +3,536 @@
     "info": {
         "version": "",
         "title": "Typeform",
-        "description": "",
-        "termsOfService": ""
+        "description": "Welcome to Typeform's Developer Platform! Use our APIs and SDKs to create beautiful forms and retrieve responses--all without using the Typeform builder or logging into Typeform.com. Create and Responses are RESTful APIs that you can use to create typeforms and retrieve responses on demand. As the responses start rolling in, you can use Webhooks to send them to a specific URL or web application. You can even build a web app that authenticates your Typeform logon, then calls our Responses API to retrieve and display the responses for your typeform at the click of a button.",
+        "termsOfService": "https:\/\/admin.typeform.com\/to\/dwk6gt"
     },
-    "servers": [
-        "https"
-    ],
-    "paths": [],
+    "servers": [],
+    "paths": {
+        "\/themes": {
+            "GET": {
+                "summary": "Retrieve themes",
+                "description": "",
+                "operationId": "RetrieveThemes",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "page_size",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "POST": {
+                "summary": "Create theme",
+                "description": "",
+                "operationId": "CreateTheme",
+                "deprecated": 0,
+                "parameters": []
+            }
+        },
+        "\/forms\/:form_id\/messages": {
+            "PUT": {
+                "summary": "Update custom messages",
+                "description": "",
+                "operationId": "UpdateCustomMessages",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "GET": {
+                "summary": "Retrieve custom form messages",
+                "description": "",
+                "operationId": "RetrieveCustomFormMessages",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/images\/:image_id\/image\/:size": {
+            "GET": {
+                "summary": "Retrieve image by size",
+                "description": "",
+                "operationId": "RetrieveImageBySize",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "image_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "size",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/themes\/:theme_id": {
+            "GET": {
+                "summary": "Retrieve theme",
+                "description": "",
+                "operationId": "RetrieveTheme",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "theme_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "DELETE": {
+                "summary": "Delete theme",
+                "description": "",
+                "operationId": "DeleteTheme",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "theme_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "PUT": {
+                "summary": "Update theme",
+                "description": "",
+                "operationId": "UpdateTheme",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "theme_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/forms\/:form_id": {
+            "DELETE": {
+                "summary": "Delete form",
+                "description": "",
+                "operationId": "DeleteForm",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "PUT": {
+                "summary": "Update form",
+                "description": "",
+                "operationId": "UpdateForm",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "PATCH": {
+                "summary": "Update form (patch)",
+                "description": "",
+                "operationId": "UpdateForm(patch)",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "GET": {
+                "summary": "Retrieve form",
+                "description": "",
+                "operationId": "RetrieveForm",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/workspaces\/:workspace_id": {
+            "DELETE": {
+                "summary": "Delete workspace",
+                "description": "",
+                "operationId": "DeleteWorkspace",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "workspace_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "GET": {
+                "summary": "Retrieve workspace",
+                "description": "",
+                "operationId": "RetrieveWorkspace",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "workspace_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "PATCH": {
+                "summary": "Update workspace",
+                "description": "",
+                "operationId": "UpdateWorkspace",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "workspace_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/forms\/:form_id\/responses?included_tokens={{included_tokens}}": {
+            "DELETE": {
+                "summary": "Delete responses",
+                "description": "",
+                "operationId": "DeleteResponses",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "included_tokens",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/me": {
+            "GET": {
+                "summary": "Retrieve your own account",
+                "description": "",
+                "operationId": "RetrieveYourOwnAccount",
+                "deprecated": 0,
+                "parameters": []
+            }
+        },
+        "\/forms\/:form_id\/webhooks": {
+            "GET": {
+                "summary": "Retrieve webhooks",
+                "description": "",
+                "operationId": "RetrieveWebhooks",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/workspaces": {
+            "GET": {
+                "summary": "Retrieve workspaces",
+                "description": "",
+                "operationId": "RetrieveWorkspaces",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "page_size",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "POST": {
+                "summary": "Create workspace",
+                "description": "",
+                "operationId": "CreateWorkspace",
+                "deprecated": 0,
+                "parameters": []
+            }
+        },
+        "\/forms\/:form_id\/webhooks\/:tag": {
+            "PUT": {
+                "summary": "Create or update webhook",
+                "description": "",
+                "operationId": "CreateOrUpdateWebhook",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "tag",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "GET": {
+                "summary": "Retrieve single webhook",
+                "description": "",
+                "operationId": "RetrieveSingleWebhook",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "tag",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "DELETE": {
+                "summary": "Delete webhook",
+                "description": "",
+                "operationId": "DeleteWebhook",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "tag",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/images": {
+            "POST": {
+                "summary": "Create image",
+                "description": "",
+                "operationId": "CreateImage",
+                "deprecated": 0,
+                "parameters": []
+            },
+            "GET": {
+                "summary": "Retrieve images collection",
+                "description": "",
+                "operationId": "RetrieveImagesCollection",
+                "deprecated": 0,
+                "parameters": []
+            }
+        },
+        "\/forms": {
+            "POST": {
+                "summary": "Create form",
+                "description": "",
+                "operationId": "CreateForm",
+                "deprecated": 0,
+                "parameters": []
+            },
+            "GET": {
+                "summary": "Retrieve forms",
+                "description": "",
+                "operationId": "RetrieveForms",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "page",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "page_size",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "workspace_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/forms\/:form_id\/responses": {
+            "GET": {
+                "summary": "Retrieve responses",
+                "description": "",
+                "operationId": "RetrieveResponses",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "form_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "page_size",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "since",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "until",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "after",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "before",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "completed",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "sort",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "query",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "fields",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/images\/:image_id": {
+            "GET": {
+                "summary": "Retrieve image",
+                "description": "",
+                "operationId": "RetrieveImage",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "image_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            },
+            "DELETE": {
+                "summary": "Delete image",
+                "description": "",
+                "operationId": "DeleteImage",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "image_id",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/images\/:image_id\/background\/:size": {
+            "GET": {
+                "summary": "Retrieve background by size",
+                "description": "",
+                "operationId": "RetrieveBackgroundBySize",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "image_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "size",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        },
+        "\/images\/:image_id\/choice\/:size": {
+            "GET": {
+                "summary": "Retrieve choice image by size",
+                "description": "",
+                "operationId": "RetrieveChoiceImageBySize",
+                "deprecated": 0,
+                "parameters": [
+                    {
+                        "name": "image_id",
+                        "in": "path",
+                        "description": ""
+                    },
+                    {
+                        "name": "size",
+                        "in": "path",
+                        "description": ""
+                    }
+                ]
+            }
+        }
+    },
     "components": {
         "schemas": []
     }
