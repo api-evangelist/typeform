@@ -1,13 +1,14 @@
 {
     "name": "Typeform",
-    "description": "Build conversational forms, surveys, quizzes, landing pages, and more. Typeforms are easy to make and refreshing to take. Try it FREE ??? no coding required.",
+    "description": "With our APIs and developer tools, you can do everything from the basics, like tweak your themes and add new images to your account, to the most powerful features Typeform offers, like retrieve responses on demand and customize forms with Hidden Fields. And you can do it all without using the Typeform builder or even logging into Typeform.com!",
     "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28236-developer-typeform-com.jpg",
     "tags": [
+        "forms",
         "have api",
         "surveys"
     ],
-    "created": "2019-12-19",
-    "modified": "2019-12-19",
+    "created": "2019-12-20",
+    "modified": "2019-12-20",
     "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/typeform\/master\/apis.json",
     "specificationVersion": "0.14",
     "apis": [
@@ -33,8 +34,44 @@
     "include": [],
     "x-common": [
         {
+            "type": "APIs.json",
+            "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/apis.json"
+        },
+        {
+            "type": "Blog",
+            "url": "https:\/\/developer.typeform.com\/"
+        },
+        {
+            "type": "Blog",
+            "url": "https:\/\/www.typeform.com\/blog\/"
+        },
+        {
             "type": "Crunchbase",
             "url": "https:\/\/crunchbase.com\/organization\/typeform"
+        },
+        {
+            "type": "Developers",
+            "url": "https:\/\/developer.typeform.com\/"
+        },
+        {
+            "type": "Documentation",
+            "url": "https:\/\/developer.typeform.com\/get-started\/"
+        },
+        {
+            "type": "FAQ",
+            "url": "https:\/\/help.typeform.com\/hc\/en-us"
+        },
+        {
+            "type": "Partners",
+            "url": "https:\/\/partners.typeform.com\/"
+        },
+        {
+            "type": "Status",
+            "url": "https:\/\/status.typeform.com\/"
+        },
+        {
+            "type": "Support",
+            "url": "https:\/\/help.typeform.com\/hc\/en-us"
         },
         {
             "type": "Twitter",
