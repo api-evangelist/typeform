@@ -5,7 +5,7 @@ provider: Typeform
 providerId: typeform
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Forms
 - Surveys
@@ -15,21 +15,40 @@ tags:
 - Rate Limiting
 - Quotas
 - Throttling
-description: Placeholder rate-limit artifact for Typeform. Replace with real limits once researched.
-notes: Initial scaffold — limits have not yet been reconciled.
+description: >-
+  Typeform applies a documented per-token rate limit of 2 requests per second
+  on the public REST API. Requests above this limit return HTTP 429 Too Many
+  Requests, and Typeform recommends honoring the Retry-After header.
+notes: >-
+  In addition, monthly response (submission) ceilings per plan act as a
+  business-level quota — heavy Responses-API consumers cannot pull more
+  submissions than their plan ingested.
 sources:
-- https://www.typeform.com/
+- https://www.typeform.com/developers/get-started/applications/
+- https://www.typeform.com/help/a/typeform-api-rate-limits/
+- https://www.typeform.com/pricing/
 responseCodes:
   throttled: 429
+headers:
+- name: Retry-After
+  description: Seconds to wait before retrying after a 429.
 limits:
-- name: Default
+- name: Public REST API requests
+  scope: api_token
+  metric: requests
+  limit: 2
+  timeFrame: 1s
+  notes: Default per-token rate limit on the REST API.
+- name: Plan response ceiling
   scope: account
-  metric: varies
-  limit: see provider documentation
-  notes: Pending reconciliation.
+  metric: responses/month
+  limit: per plan
+  notes: Plan-tier response cap implicitly bounds Responses-API throughput.
 policies:
 - name: Backoff Strategy
-  description: Clients should implement exponential backoff with jitter and honor any Retry-After header.
+  description: Honor Retry-After on 429; use exponential backoff with jitter.
+- name: Webhook over polling
+  description: Prefer Webhooks API over Responses-API polling to avoid rate-limit pressure.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

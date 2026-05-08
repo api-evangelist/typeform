@@ -3,7 +3,12 @@ url: https://raw.githubusercontent.com/api-evangelist/typeform/refs/heads/main/a
 name: Typeform
 x-type: company
 description: >-
-  Typeform is a conversational forms and surveys platform with branching logic, integrations, and analytics. APIs cover Forms, Responses, Webhooks, Themes, and Workspaces.
+  Typeform is a conversational forms and surveys platform with branching logic,
+  integrations and analytics. The developer platform exposes four primary API
+  surfaces — Create API (manage forms/themes/images), Responses API
+  (programmatic access to submissions), Webhooks API and an Embed SDK —
+  along with deep workspace and account endpoints. API documentation is
+  hosted on Stoplight; a downloadable OpenAPI spec is not publicly available.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Forms
@@ -11,13 +16,86 @@ tags:
   - Conversational
   - Lead Capture
   - SaaS
+  - Webhooks
+  - Embed
 created: '2026-05-08'
 modified: '2026-05-08'
 specificationVersion: '0.19'
-apis: []
+apis:
+  - aid: typeform:create
+    name: Typeform Create API
+    description: >-
+      REST API for creating, updating and deleting forms, themes, images and
+      workspaces. Bearer-token authentication via personal access tokens.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.typeform.com/developers/create/
+    baseURL: https://api.typeform.com
+    tags:
+      - REST
+      - Forms
+      - Themes
+      - Images
+      - Workspaces
+    properties:
+      - type: Documentation
+        url: https://www.typeform.com/developers/create/
+      - type: Reference
+        url: https://www.typeform.com/developers/create/reference/
+  - aid: typeform:responses
+    name: Typeform Responses API
+    description: >-
+      REST API to retrieve form submissions in JSON without polling webhooks.
+      Bearer-token auth.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.typeform.com/developers/responses/
+    baseURL: https://api.typeform.com
+    tags:
+      - REST
+      - Responses
+      - Submissions
+    properties:
+      - type: Documentation
+        url: https://www.typeform.com/developers/responses/
+  - aid: typeform:webhooks
+    name: Typeform Webhooks API
+    description: >-
+      REST endpoints for managing webhooks that POST every submission to a
+      configured URL.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.typeform.com/developers/webhooks/
+    baseURL: https://api.typeform.com
+    tags:
+      - REST
+      - Webhooks
+    properties:
+      - type: Documentation
+        url: https://www.typeform.com/developers/webhooks/
+  - aid: typeform:embed
+    name: Typeform Embed SDK
+    description: >-
+      JavaScript embed SDK for inline / popup / fullscreen / sidetab / popover /
+      slider experiences in your own website or web app. Not a REST API.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.typeform.com/developers/embed/
+    baseURL: https://embed.typeform.com
+    tags:
+      - SDK
+      - Embed
+      - JavaScript
+    properties:
+      - type: Documentation
+        url: https://www.typeform.com/developers/embed/
 common:
   - type: Website
     url: https://www.typeform.com/
+  - type: Documentation
+    url: https://www.typeform.com/developers/
+  - type: Pricing
+    url: https://www.typeform.com/pricing/
+  - type: GitHub
+    url: https://github.com/typeform
+  - type: StatusPage
+    url: https://status.typeform.com/
   - type: Plans
     url: plans/typeform-plans-pricing.yml
   - type: RateLimits

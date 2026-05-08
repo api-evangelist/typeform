@@ -5,7 +5,7 @@ provider: Typeform
 providerId: typeform
 created: '2026-05-08'
 modified: '2026-05-08'
-reconciled: false
+reconciled: true
 tags:
 - Forms
 - Surveys
@@ -13,29 +13,169 @@ tags:
 - Lead Capture
 - SaaS
 - Plans
-description: Placeholder plans/pricing artifact for Typeform. Replace with real published pricing once
-  the pipeline researches the provider's plans page.
-notes: Initial scaffold — plans/pricing have not yet been reconciled.
+- Pricing
+description: >-
+  Typeform's monthly plans are tiered by included responses per month and
+  number of users. Annual billing is advertised at ~30% discount. There are
+  also Talent (HR) and Growth (marketing) plans, plus custom Enterprise.
+  All paid plans expose the same API surface; the API is gated by token, not
+  by plan tier per se, though heavy consumption is bounded by plan responses.
+notes: >-
+  Public pricing as of 2026-05-08 from typeform.com/pricing. Free tier exists
+  for trials but the paid Basic plan is the lowest published tier here.
 sources:
-- https://www.typeform.com/
+- https://www.typeform.com/pricing/
 plans:
-- id: typeform-default
-  name: To Be Reconciled
-  type: enterprise
-  description: Initial scaffold; replace with provider plan tiers once pricing is reconciled.
+- id: typeform-basic
+  name: Basic
+  type: subscription
+  description: $39/month; 100 responses/month; 1 user.
   entries:
-  - label: API Access
-    name: api_access
+  - label: Plan price
+    name: monthly_price
     type: flat
-    metric: varies
+    metric: month
     limit: -1
-    timeFrame: usage
+    timeFrame: month
     geo: global
     unit: 1
-    price: see https://www.typeform.com/
+    price: 39
+    currency: USD
     userMultiplied: false
-  elements:
-  - name: Pending Reconciliation
+  - label: Included responses
+    name: responses
+    type: tier
+    metric: responses/month
+    limit: 100
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: false
+- id: typeform-plus
+  name: Plus
+  type: subscription
+  description: $79/month; 1,000 responses/month; 3 users.
+  entries:
+  - label: Plan price
+    name: monthly_price
+    type: flat
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 79
+    currency: USD
+    userMultiplied: false
+  - label: Included responses
+    name: responses
+    type: tier
+    metric: responses/month
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: false
+- id: typeform-business
+  name: Business
+  type: subscription
+  description: $129/month; 10,000 responses/month; 5 users.
+  entries:
+  - label: Plan price
+    name: monthly_price
+    type: flat
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 129
+    currency: USD
+    userMultiplied: false
+  - label: Included responses
+    name: responses
+    type: tier
+    metric: responses/month
+    limit: 10000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: false
+- id: typeform-talent
+  name: Talent
+  type: subscription
+  description: $169/month; 3,000 responses/month; 3 users (HR-focused).
+  entries:
+  - label: Plan price
+    name: monthly_price
+    type: flat
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 169
+    currency: USD
+    userMultiplied: false
+  - label: Included responses
+    name: responses
+    type: tier
+    metric: responses/month
+    limit: 3000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 0
+    userMultiplied: false
+- id: typeform-growth-flow
+  name: Growth Flow
+  type: subscription
+  description: $379/month; 10,000+ responses/month; 5 seats (marketing-focused).
+  entries:
+  - label: Plan price
+    name: monthly_price
+    type: flat
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 379
+    currency: USD
+    userMultiplied: false
+- id: typeform-growth-custom
+  name: Growth Custom
+  type: enterprise
+  description: Custom annual pricing; 20,000+ responses/month; custom seats.
+  entries:
+  - label: Custom contract
+    name: enterprise_contract
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: annual
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+- id: typeform-enterprise
+  name: Enterprise
+  type: enterprise
+  description: Custom; tailored response limits, seats and dedicated support.
+  entries:
+  - label: Custom contract
+    name: enterprise_contract
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: annual
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
