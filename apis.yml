@@ -1,0 +1,29 @@
+aid: typeform
+url: https://raw.githubusercontent.com/api-evangelist/typeform/refs/heads/main/apis.yml
+name: Typeform
+x-type: company
+description: >-
+  Typeform is a conversational forms and surveys platform with branching logic, integrations, and analytics. APIs cover Forms, Responses, Webhooks, Themes, and Workspaces.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Forms
+  - Surveys
+  - Conversational
+  - Lead Capture
+  - SaaS
+created: '2026-05-08'
+modified: '2026-05-08'
+specificationVersion: '0.19'
+apis: []
+common:
+  - type: Website
+    url: https://www.typeform.com/
+  - type: Plans
+    url: plans/typeform-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/typeform-rate-limits.yml
+  - type: FinOps
+    url: finops/typeform-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
