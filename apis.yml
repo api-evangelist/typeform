@@ -102,6 +102,12 @@ common:
     url: rate-limits/typeform-rate-limits.yml
   - type: FinOps
     url: finops/typeform-finops.yml
+  - type: Integrations
+    url: https://www.typeform.com/partners
+integrations:
+  - name: Become an agency partner
+  - name: Become a technology partner
+  - name: Startups
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
