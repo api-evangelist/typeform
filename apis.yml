@@ -1,7 +1,7 @@
 aid: typeform
 url: https://raw.githubusercontent.com/api-evangelist/typeform/refs/heads/main/apis.yml
 name: Typeform
-x-type: company
+kind: company
 description: >-
   Typeform is a conversational forms and surveys platform with branching logic,
   integrations and analytics. The developer platform exposes four primary API
