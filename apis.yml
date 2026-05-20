@@ -86,6 +86,8 @@ apis:
       - type: Documentation
         url: https://www.typeform.com/developers/embed/
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/typeform-
   - type: Website
     url: https://www.typeform.com/
   - type: Documentation
