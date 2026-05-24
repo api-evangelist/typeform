@@ -1,0 +1,249 @@
+openapi: 3.1.0
+info:
+  title: Typeform Create API
+  version: '1.0'
+  description: >-
+    The Typeform Create API lets you programmatically manage forms, themes,
+    and images on Typeform. Authentication is via a personal access token or
+    an OAuth 2.0 application access token passed as a Bearer token.
+  contact:
+    name: Typeform Developers
+    url: https://www.typeform.com/developers/create/
+servers:
+  - url: https://api.typeform.com
+    description: Default (US) data center
+  - url: https://api.eu.typeform.com
+    description: EU data center
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token or OAuth 2.0 access token.
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.typeform.com/oauth/authorize
+          tokenUrl: https://api.typeform.com/oauth/token
+          scopes:
+            forms:read: Read forms
+            forms:write: Create and modify forms
+            images:read: Read images
+            images:write: Upload images
+            themes:read: Read themes
+            themes:write: Create and modify themes
+  schemas:
+    Form:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        workspace:
+          type: object
+          properties:
+            href:
+              type: string
+        fields:
+          type: array
+          items:
+            type: object
+    FormList:
+      type: object
+      properties:
+        total_items:
+          type: integer
+        page_count:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Form'
+    Theme:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        background:
+          type: object
+        colors:
+          type: object
+        font:
+          type: string
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+        file_name:
+          type: string
+        src:
+          type: string
+security:
+  - bearerAuth: []
+paths:
+  /forms:
+    get:
+      summary: Retrieve forms
+      operationId: listForms
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+        - in: query
+          name: page_size
+          schema:
+            type: integer
+        - in: query
+          name: search
+          schema:
+            type: string
+        - in: query
+          name: workspace_id
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of forms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormList'
+    post:
+      summary: Create form
+      operationId: createForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form'
+      responses:
+        '201':
+          description: Form created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+  /forms/{form_id}:
+    parameters:
+      - in: path
+        name: form_id
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Retrieve form
+      operationId: getForm
+      responses:
+        '200':
+          description: Form details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+    put:
+      summary: Update form (full replace)
+      operationId: updateForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form'
+      responses:
+        '200':
+          description: Form updated
+    patch:
+      summary: Update form (patch)
+      operationId: patchForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+      responses:
+        '200':
+          description: Form patched
+    delete:
+      summary: Delete form
+      operationId: deleteForm
+      responses:
+        '204':
+          description: Form deleted
+  /images:
+    get:
+      summary: Retrieve images collection
+      operationId: listImages
+      responses:
+        '200':
+          description: Image collection
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Image'
+    post:
+      summary: Create image
+      operationId: createImage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: Base64-encoded image data
+                url:
+                  type: string
+                file_name:
+                  type: string
+      responses:
+        '201':
+          description: Image created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+  /themes:
+    get:
+      summary: Retrieve themes
+      operationId: listThemes
+      responses:
+        '200':
+          description: Themes collection
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+    post:
+      summary: Create theme
+      operationId: createTheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Theme'
+      responses:
+        '201':
+          description: Theme created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
