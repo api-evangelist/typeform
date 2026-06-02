@@ -1,0 +1,377 @@
+asyncapi: '2.6.0'
+info:
+  title: Typeform Webhooks
+  version: '1.0.0'
+  description: >-
+    AsyncAPI description of Typeform's webhook surface. Typeform delivers a
+    single event type (`form_response`) via HTTP POST to a subscriber-configured
+    HTTPS URL every time a respondent submits a typeform. Payloads can be
+    signed with HMAC-SHA256 using a per-webhook shared secret; when signing is
+    enabled the signature is delivered in the `Typeform-Signature` header in
+    the form `sha256=<base64(HMAC_SHA256(secret, raw_body))>`.
+
+
+    Subscribers must respond with a 2XX status code within 30 seconds. Failed
+    deliveries are retried per Typeform's policy (immediate disable on
+    404/410; 2-3 minute retries for 10 hours on 408/423/429/503; otherwise up
+    to 5 retries at 5m, 10m, 20m, 1h, 2h, 3h, 4h).
+
+    Source documentation:
+      - https://www.typeform.com/developers/webhooks/
+      - https://www.typeform.com/developers/webhooks/secure-your-webhooks/
+      - https://www.typeform.com/developers/webhooks/example-payload/
+  contact:
+    name: Typeform Developers
+    url: https://www.typeform.com/developers/webhooks/
+  license:
+    name: Proprietary
+    url: https://www.typeform.com/terms-of-service/
+defaultContentType: application/json
+servers:
+  subscriber:
+    url: '{webhook_url}'
+    protocol: https
+    description: >-
+      HTTPS endpoint owned by the webhook subscriber. Configured per-form via
+      the Typeform Webhooks REST API (`PUT /forms/{form_id}/webhooks/{tag}`).
+      All webhook URLs must use HTTPS; self-signed certificates are rejected.
+    variables:
+      webhook_url:
+        default: https://example.com/typeform-webhook
+        description: Fully-qualified HTTPS URL of the subscriber's webhook endpoint.
+channels:
+  form_response:
+    description: >-
+      Channel for `form_response` events. Typeform POSTs one event per
+      respondent submission to the subscriber's configured webhook URL.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    publish:
+      operationId: receiveFormResponse
+      summary: Receive a form_response webhook from Typeform
+      description: >-
+        Typeform POSTs a `form_response` event each time a respondent
+        successfully submits a typeform. The subscriber must return a 2XX
+        status within 30 seconds.
+      bindings:
+        http:
+          bindingVersion: '0.3.0'
+      message:
+        $ref: '#/components/messages/FormResponseEvent'
+components:
+  messages:
+    FormResponseEvent:
+      name: FormResponseEvent
+      title: form_response webhook event
+      summary: Submission delivered by Typeform when a respondent completes a form.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/FormResponseEvent'
+      examples:
+        - name: BasicSubmission
+          summary: Minimal form_response payload illustrating top-level shape.
+          payload:
+            event_id: LtWXD3crgy
+            event_type: form_response
+            form_response:
+              form_id: lT4Z3j
+              token: a3a12ec67a1365927098a606107fac15
+              landed_at: '2018-01-18T18:07:02Z'
+              submitted_at: '2018-01-18T18:17:02Z'
+              definition:
+                id: lT4Z3j
+                title: Webhooks example
+                fields: []
+              answers: []
+  schemas:
+    WebhookHeaders:
+      type: object
+      description: >-
+        HTTP headers Typeform sets on every webhook delivery. `Typeform-Signature`
+        is only present when a `secret` has been configured on the webhook.
+      properties:
+        Typeform-Signature:
+          type: string
+          description: >-
+            HMAC-SHA256 signature of the raw request body, base64-encoded and
+            prefixed with `sha256=`. Computed as
+            `sha256=` + base64(HMAC_SHA256(secret, raw_body)). Compare using a
+            constant-time comparison to prevent timing attacks.
+          pattern: '^sha256=.+$'
+          example: sha256=2hHCi4u8b1lFEdc4QymS+a4i4yzlu0FrI8gZJNoQVDw=
+        Content-Type:
+          type: string
+          enum:
+            - application/json
+          example: application/json
+        User-Agent:
+          type: string
+          example: Typeform Webhooks
+    FormResponseEvent:
+      type: object
+      description: Top-level envelope for a `form_response` webhook event.
+      required:
+        - event_id
+        - event_type
+        - form_response
+      properties:
+        event_id:
+          type: string
+          description: Unique identifier for this webhook delivery event.
+          example: LtWXD3crgy
+        event_type:
+          type: string
+          description: Event type. Always `form_response`.
+          enum:
+            - form_response
+        form_response:
+          $ref: '#/components/schemas/FormResponse'
+    FormResponse:
+      type: object
+      description: Submission payload describing the form, the answers and any context.
+      required:
+        - form_id
+        - token
+        - submitted_at
+        - landed_at
+      properties:
+        form_id:
+          type: string
+          description: ID of the form that produced this response.
+          example: lT4Z3j
+        token:
+          type: string
+          description: Unique identifier of the response.
+          example: a3a12ec67a1365927098a606107fac15
+        response_id:
+          type: string
+          description: Alias for `token` on newer payloads.
+        response_url:
+          type: string
+          format: uri
+          description: URL to the results dashboard for this response (when available).
+        landed_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the respondent landed on the form.
+          example: '2018-01-18T18:07:02Z'
+        submitted_at:
+          type: string
+          format: date-time
+          description: ISO 8601 timestamp of when the respondent submitted the form.
+          example: '2018-01-18T18:17:02Z'
+        definition:
+          $ref: '#/components/schemas/Definition'
+        answers:
+          type: array
+          description: >-
+            Answers provided by the respondent. Only answered questions are
+            included; questions skipped via logic jumps or not required are
+            omitted.
+          items:
+            $ref: '#/components/schemas/Answer'
+        hidden:
+          type: object
+          description: Hidden field key/value pairs passed in the form URL.
+          additionalProperties:
+            type: string
+          example:
+            user_id: abc123456
+        calculated:
+          type: object
+          description: Calculated score for the response, when scoring is configured.
+          properties:
+            score:
+              type: integer
+              example: 9
+        variables:
+          type: array
+          description: Variables defined on the form (text or number typed).
+          items:
+            $ref: '#/components/schemas/Variable'
+        ending:
+          type: object
+          description: Ending screen the respondent saw at the end of the form.
+          properties:
+            id:
+              type: string
+            ref:
+              type: string
+    Definition:
+      type: object
+      description: Snapshot of the form definition at the time of submission.
+      properties:
+        id:
+          type: string
+          description: Form ID.
+        title:
+          type: string
+          description: Form title.
+        fields:
+          type: array
+          description: Field definitions that the answers reference.
+          items:
+            $ref: '#/components/schemas/FieldDefinition'
+        endings:
+          type: array
+          items:
+            type: object
+    FieldDefinition:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        ref:
+          type: string
+        type:
+          type: string
+          description: Question type.
+        allow_multiple_selections:
+          type: boolean
+        allow_other_choice:
+          type: boolean
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              label:
+                type: string
+              ref:
+                type: string
+    Answer:
+      type: object
+      description: >-
+        A single answer. The `type` field indicates which value field is
+        populated.
+      required:
+        - type
+        - field
+      properties:
+        field:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+            ref:
+              type: string
+        type:
+          type: string
+          enum:
+            - text
+            - email
+            - choice
+            - choices
+            - date
+            - boolean
+            - number
+            - url
+            - file_url
+            - phone_number
+            - payment
+            - signature
+            - multi_format
+        text:
+          type: string
+        email:
+          type: string
+          format: email
+        choice:
+          type: object
+          properties:
+            label:
+              type: string
+            other:
+              type: string
+            id:
+              type: string
+            ref:
+              type: string
+        choices:
+          type: object
+          properties:
+            labels:
+              type: array
+              items:
+                type: string
+            other:
+              type: string
+            ids:
+              type: array
+              items:
+                type: string
+            refs:
+              type: array
+              items:
+                type: string
+        date:
+          type: string
+          format: date
+        boolean:
+          type: boolean
+        number:
+          type: number
+        url:
+          type: string
+          format: uri
+        file_url:
+          type: string
+          format: uri
+        phone_number:
+          type: string
+        payment:
+          type: object
+          properties:
+            amount:
+              type: string
+            last4:
+              type: string
+            name:
+              type: string
+            success:
+              type: boolean
+        signature:
+          type: string
+          format: uri
+          description: URL to the captured signature image.
+        multi_format:
+          type: object
+        answer_url:
+          type: string
+          format: uri
+          description: Permalink to the answer (when supported).
+    Variable:
+      type: object
+      properties:
+        key:
+          type: string
+        type:
+          type: string
+          enum:
+            - text
+            - number
+        text:
+          type: string
+        number:
+          type: number
+  securitySchemes:
+    typeformSignature:
+      type: httpApiKey
+      in: header
+      name: Typeform-Signature
+      description: >-
+        HMAC-SHA256 signature of the raw request body, base64-encoded and
+        prefixed with `sha256=`. The shared secret is configured on the webhook
+        via the Typeform Webhooks REST API. Signature is only present when a
+        `secret` has been configured.

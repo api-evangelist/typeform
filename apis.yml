@@ -19,7 +19,7 @@ tags:
   - Webhooks
   - Embed
 created: '2026-05-08'
-modified: '2026-05-08'
+modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
   - aid: typeform:create
@@ -70,6 +70,8 @@ apis:
     properties:
       - type: Documentation
         url: https://www.typeform.com/developers/webhooks/
+      - type: AsyncAPI
+        url: asyncapi/typeform-asyncapi.yml
   - aid: typeform:embed
     name: Typeform Embed SDK
     description: >-
