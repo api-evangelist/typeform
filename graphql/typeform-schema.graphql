@@ -1,0 +1,952 @@
+"""
+Typeform GraphQL Schema
+Conceptual schema derived from the Typeform REST API surface:
+Create API, Responses API, Webhooks API, and Embed SDK.
+Reference: https://www.typeform.com/developers/create/reference/
+"""
+
+# ─────────────────────────────────────────────
+# Scalars
+# ─────────────────────────────────────────────
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ─────────────────────────────────────────────
+# Enums
+# ─────────────────────────────────────────────
+
+enum FieldType {
+  SHORT_TEXT
+  LONG_TEXT
+  MULTIPLE_CHOICE
+  PICTURE_CHOICE
+  DROPDOWN
+  YES_NO
+  EMAIL
+  DATE
+  NUMBER
+  RATING
+  OPINION_SCALE
+  RANKING
+  MATRIX
+  FILE_UPLOAD
+  PAYMENT
+  WEBSITE
+  PHONE_NUMBER
+  STATEMENT
+  GROUP
+  LEGAL
+}
+
+enum LogicActionType {
+  JUMP
+  ADD
+  SUBTRACT
+  MULTIPLY
+  DIVIDE
+}
+
+enum ConditionOperator {
+  IS
+  IS_NOT
+  LOWER_THAN
+  LOWER_EQUAL_THAN
+  GREATER_THAN
+  GREATER_EQUAL_THAN
+  CONTAINS
+  NOT_CONTAINS
+  BEGINS_WITH
+  ENDS_WITH
+  ON
+  NOT_ON
+  EARLIER_THAN
+  EARLIER_THAN_OR_ON
+  LATER_THAN
+  LATER_THAN_OR_ON
+  ALWAYS
+  IS_ANSWERED
+  IS_NOT_ANSWERED
+}
+
+enum ConditionGroupOperator {
+  AND
+  OR
+}
+
+enum ThemeColorKey {
+  QUESTION
+  ANSWER
+  BUTTON
+  BACKGROUND
+}
+
+enum WorkspaceRole {
+  OWNER
+  EDITOR
+  VIEWER
+}
+
+enum WebhookStatus {
+  ENABLED
+  DISABLED
+}
+
+enum PublishingStatus {
+  PUBLISHED
+  DRAFT
+  CLOSED
+}
+
+enum EmbedMode {
+  INLINE
+  POPUP
+  FULLSCREEN
+  SIDETAB
+  POPOVER
+  SLIDER
+}
+
+enum FontFamilyCategory {
+  SANS_SERIF
+  SERIF
+  MONOSPACE
+  DISPLAY
+}
+
+enum PermissionScope {
+  FORMS_READ
+  FORMS_WRITE
+  RESPONSES_READ
+  WEBHOOKS_READ
+  WEBHOOKS_WRITE
+  WORKSPACES_READ
+  WORKSPACES_WRITE
+  IMAGES_READ
+  IMAGES_WRITE
+  THEMES_READ
+  THEMES_WRITE
+  ACCOUNTS_READ
+}
+
+# ─────────────────────────────────────────────
+# Core Form Types
+# ─────────────────────────────────────────────
+
+"""A Typeform — the top-level container for fields, logic, theme and settings."""
+type Form {
+  id: ID!
+  title: String!
+  language: String
+  fields: [FormField!]
+  welcomeScreens: [WelcomeScreen!]
+  thankYouScreens: [ThankYouScreen!]
+  logic: [Logic!]
+  variables: [Variable!]
+  hiddenFields: [HiddenField!]
+  theme: Theme
+  workspace: Workspace
+  settings: AppSettings
+  links: FormLinks
+  status: PublishingStatus
+  tags: [Tag!]
+  createdAt: DateTime
+  lastUpdatedAt: DateTime
+  _links: FormLinks
+}
+
+"""Hyperlinks embedded in a Form resource."""
+type FormLinks {
+  display: URL
+}
+
+"""A single interactive field within a form."""
+type FormField {
+  id: ID!
+  ref: String
+  title: String!
+  type: FieldType!
+  properties: FieldProperties
+  validations: FieldValidations
+  attachment: Attachment
+  layout: Layout
+}
+
+"""Union of all field-specific property bags."""
+type FieldProperties {
+  description: String
+  choices: [Choice!]
+  choiceList: ChoiceList
+  dateSettings: DateSettings
+  ratingSettings: RatingSettings
+  scaleSettings: ScaleSettings
+  otherSettings: OtherSettings
+  fields: [FormField!]        # for GROUP type
+  allowMultipleSelection: Boolean
+  allowOtherChoice: Boolean
+  hideMarks: Boolean
+  buttonText: String
+  shape: String               # for RATING
+  steps: Int                  # for OPINION_SCALE / RATING
+  startAtOne: Boolean
+  supersizeImage: Boolean
+  randomize: Boolean
+  alphabeticalOrder: Boolean
+  currency: String            # for PAYMENT
+  price: VariableRef
+}
+
+"""Server-side validation rules for a field."""
+type FieldValidations {
+  required: Boolean
+  maxLength: Int
+  minValue: Float
+  maxValue: Float
+}
+
+"""Settings for date-type fields."""
+type DateSettings {
+  dateFormat: String
+  separator: String
+  structure: String
+}
+
+"""Settings for rating-type fields."""
+type RatingSettings {
+  shape: String
+  steps: Int
+}
+
+"""Settings for opinion-scale / NPS-style fields."""
+type ScaleSettings {
+  steps: Int
+  startAtOne: Boolean
+  labels: ScaleLabels
+}
+
+"""Start and end labels for a scale."""
+type ScaleLabels {
+  left: String
+  center: String
+  right: String
+}
+
+"""Settings for the "Other" option in choice fields."""
+type OtherSettings {
+  label: String
+}
+
+"""A named list of choices (reusable across fields)."""
+type ChoiceList {
+  id: ID!
+  name: String!
+  choices: [Choice!]!
+}
+
+"""A single selectable choice within a choice-type field."""
+type Choice {
+  id: ID!
+  ref: String
+  label: String!
+  attachment: Attachment
+}
+
+"""A file or image attached to a field, screen, or choice."""
+type Attachment {
+  type: String!
+  href: URL!
+  scale: Float
+  properties: AttachmentProperties
+}
+
+"""Optional layout override for an attachment."""
+type AttachmentProperties {
+  description: String
+  focalPoint: FocalPoint
+}
+
+"""X/Y focal-point for image cropping."""
+type FocalPoint {
+  x: Float!
+  y: Float!
+}
+
+"""The layout of a field's visual presentation."""
+type Layout {
+  type: String
+  attachment: Attachment
+  placement: String
+}
+
+# ─────────────────────────────────────────────
+# Screen Types
+# ─────────────────────────────────────────────
+
+"""The first screen shown to a respondent before the form starts."""
+type WelcomeScreen {
+  ref: String
+  title: String!
+  properties: ScreenProperties
+  attachment: Attachment
+  layout: Layout
+}
+
+"""The final screen shown after a respondent submits."""
+type ThankYouScreen {
+  ref: String
+  title: String!
+  properties: ScreenProperties
+  attachment: Attachment
+  layout: Layout
+}
+
+"""Shared properties for welcome and thank-you screens."""
+type ScreenProperties {
+  showButton: Boolean
+  buttonText: String
+  shareIcons: Boolean
+  description: String
+}
+
+"""A named button on a screen or field."""
+type Button {
+  text: String!
+}
+
+# ─────────────────────────────────────────────
+# Logic and Variables
+# ─────────────────────────────────────────────
+
+"""A logic block associated with a form field."""
+type Logic {
+  type: String!
+  ref: String!
+  actions: [Action!]!
+}
+
+"""A single action taken when a logic condition is satisfied."""
+type Action {
+  action: LogicActionType!
+  details: ActionDetails!
+  condition: ConditionGroup!
+}
+
+"""Target and value for a logic action."""
+type ActionDetails {
+  to: Reference
+  target: Reference
+  value: JSON
+}
+
+"""A reference to a field, variable, or screen by ref or id."""
+type Reference {
+  type: String!
+  value: String!
+}
+
+"""A variable reference used in payment and calculation fields."""
+type VariableRef {
+  type: String!
+  value: JSON
+}
+
+"""A group of conditions joined by AND or OR."""
+type ConditionGroup {
+  op: ConditionGroupOperator!
+  vars: [Condition!]!
+}
+
+"""A single logical condition on a field value."""
+type Condition {
+  op: ConditionOperator!
+  vars: [ConditionVar!]!
+}
+
+"""One side of a condition comparison (field ref or literal)."""
+type ConditionVar {
+  type: String!
+  value: JSON
+}
+
+"""A logic jump — navigates to another field or screen."""
+type LogicJump {
+  id: ID!
+  from: Reference!
+  to: Reference!
+  condition: Condition
+}
+
+"""A form-scoped variable used in calculations or hidden field seeding."""
+type Variable {
+  type: String!
+  value: JSON
+}
+
+"""A hidden field — carries metadata into a response without display."""
+type HiddenField {
+  id: ID!
+  ref: String
+}
+
+"""A numeric calculation attached to a form response."""
+type Calculation {
+  id: ID!
+  ref: String
+  title: String
+  type: String
+  expression: String
+}
+
+# ─────────────────────────────────────────────
+# Theme and Branding
+# ─────────────────────────────────────────────
+
+"""A visual theme applied to a form."""
+type Theme {
+  id: ID!
+  name: String!
+  visibility: String
+  colors: ThemeColors!
+  font: Font
+  backgroundImage: Image
+  hasTransparentButton: Boolean
+}
+
+"""Color palette defined by a theme."""
+type ThemeColors {
+  question: String
+  answer: String
+  button: String
+  background: String
+}
+
+"""A color slot within a theme."""
+type ThemeColor {
+  key: ThemeColorKey!
+  value: String!
+}
+
+"""A hosted image resource within Typeform."""
+type Image {
+  id: ID!
+  src: URL!
+  mediaType: String
+  fileName: String
+  width: Int
+  height: Int
+  hasAlpha: Boolean
+  avgColor: String
+}
+
+"""A brand kit that applies logos, colors and fonts across forms."""
+type BrandKit {
+  id: ID!
+  name: String!
+  logo: Image
+  colors: [ThemeColor!]
+  fonts: [Font!]
+  workspace: Workspace
+}
+
+"""A single web font applied to a theme."""
+type Font {
+  family: String!
+  size: Int
+  weight: Int
+  style: String
+}
+
+"""A font family available in the Typeform font catalog."""
+type FontFamily {
+  family: String!
+  category: FontFamilyCategory
+  variants: [String!]
+}
+
+# ─────────────────────────────────────────────
+# Workspace and Collaboration
+# ─────────────────────────────────────────────
+
+"""An organizational workspace that owns forms and members."""
+type Workspace {
+  id: ID!
+  name: String!
+  shared: Boolean
+  default: Boolean
+  forms: WorkspaceFormsSummary
+  members: [Collaborator!]
+  self: WorkspaceSelf
+  account: String
+}
+
+"""Summary count of forms inside a workspace."""
+type WorkspaceFormsSummary {
+  count: Int
+  href: URL
+}
+
+"""Calling user's own role within a workspace."""
+type WorkspaceSelf {
+  href: URL
+  role: WorkspaceRole
+}
+
+"""A workspace that has been shared with the calling user."""
+type SharedWorkspace {
+  id: ID!
+  name: String!
+  owner: String
+  role: WorkspaceRole
+  forms: WorkspaceFormsSummary
+}
+
+"""A collaborator on a workspace."""
+type Collaborator {
+  id: ID!
+  email: String!
+  name: String
+  role: WorkspaceRole
+  addedAt: DateTime
+}
+
+"""A named team of collaborators."""
+type Team {
+  id: ID!
+  name: String!
+  members: [Collaborator!]
+}
+
+# ─────────────────────────────────────────────
+# Responses
+# ─────────────────────────────────────────────
+
+"""A single form submission."""
+type Response {
+  responseId: ID!
+  landedAt: DateTime
+  submittedAt: DateTime
+  referer: String
+  userAgent: String
+  calculated: Calculation
+  hidden: JSON
+  definition: FormDefinitionSnapshot
+  answers: [Answer!]
+  metadata: ResponseMetadata
+}
+
+"""Snapshot of the form definition captured at submission time."""
+type FormDefinitionSnapshot {
+  id: ID!
+  title: String!
+  fields: [FormField!]
+}
+
+"""Browser / session metadata collected with a response."""
+type ResponseMetadata {
+  userAgent: String
+  platform: String
+  referer: String
+  networkId: String
+  browser: String
+}
+
+"""A single answer to one form field."""
+type Answer {
+  type: String!
+  field: AnswerFieldRef!
+  value: AnswerValue
+}
+
+"""Lightweight field reference embedded in an answer."""
+type AnswerFieldRef {
+  id: ID!
+  type: FieldType!
+  ref: String
+  title: String
+}
+
+"""The polymorphic answer value — may be text, number, boolean, choice etc."""
+type AnswerValue {
+  text: String
+  number: Float
+  boolean: Boolean
+  email: String
+  url: String
+  date: String
+  phoneNumber: String
+  choices: AnswerChoices
+  fileUrl: URL
+  payment: PaymentAnswer
+}
+
+"""Multiple selected choices in an answer."""
+type AnswerChoices {
+  labels: [String!]
+  refs: [String!]
+  other: String
+}
+
+"""Payment answer details."""
+type PaymentAnswer {
+  amount: String
+  last4: String
+  name: String
+}
+
+"""Aggregate form completion statistics."""
+type Completion {
+  formId: ID!
+  total: Int
+  completed: Int
+  rate: Float
+  uniqueViews: Int
+  uniqueCompletions: Int
+}
+
+"""A respondent identity linked to one or more responses."""
+type Responder {
+  id: ID!
+  email: String
+  responses: [Response!]
+}
+
+# ─────────────────────────────────────────────
+# Webhooks
+# ─────────────────────────────────────────────
+
+"""A webhook subscription that receives new responses in real time."""
+type Webhook {
+  id: ID!
+  formId: ID!
+  tag: String!
+  url: URL!
+  enabled: Boolean!
+  verifySSL: Boolean
+  secret: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""An inbound webhook event payload pushed to a subscriber URL."""
+type WebhookEvent {
+  eventId: ID!
+  eventType: String!
+  formResponse: Response
+}
+
+# ─────────────────────────────────────────────
+# Publishing and Distribution
+# ─────────────────────────────────────────────
+
+"""Publishing state and shareable links for a form."""
+type SurveyPublishing {
+  formId: ID!
+  status: PublishingStatus!
+  shareURL: URL
+  embedURL: URL
+  publishedAt: DateTime
+  closedAt: DateTime
+  responsesLimit: Int
+  scheduledClose: DateTime
+}
+
+"""A form collector — a distinct distribution channel (link, embed, etc.)."""
+type Collector {
+  id: ID!
+  formId: ID!
+  name: String
+  mode: EmbedMode
+  url: URL
+  status: PublishingStatus
+  createdAt: DateTime
+}
+
+"""Configuration for a Typeform embedded within a host page."""
+type TypeformEmbed {
+  formId: ID!
+  mode: EmbedMode!
+  width: String
+  height: String
+  hideHeaders: Boolean
+  hideFooter: Boolean
+  opacity: Int
+  buttonText: String
+  autoClose: Int
+  onSubmit: String
+  onReady: String
+  onQuestionChanged: String
+}
+
+"""A modal layout configuration for popup or slider embeds."""
+type ModalLayout {
+  width: Int
+  height: Int
+  fullScreen: Boolean
+}
+
+# ─────────────────────────────────────────────
+# Account and Security
+# ─────────────────────────────────────────────
+
+"""Application-level settings for a form."""
+type AppSettings {
+  language: String
+  showProgressBar: Boolean
+  showTypeformBranding: Boolean
+  meta: FormMeta
+  redirectAfterSubmitUrl: URL
+  selfNotifications: Notification
+  respondentNotifications: Notification
+  googleAnalytics: String
+  facebookPixel: String
+  googleTagManager: String
+}
+
+"""SEO/social meta for a form."""
+type FormMeta {
+  title: String
+  description: String
+  image: URL
+  allowIndexing: Boolean
+}
+
+"""Email notification rule (for self or respondent)."""
+type Notification {
+  enabled: Boolean
+  recipients: [String!]
+  replyTo: String
+  subject: String
+  message: String
+}
+
+"""A personal API token for authenticating Typeform API calls."""
+type APIToken {
+  id: ID!
+  name: String!
+  scopes: [PermissionScope!]!
+  token: String
+  createdAt: DateTime
+  lastUsedAt: DateTime
+}
+
+"""A permission grant for a token or collaborator."""
+type Permission {
+  scope: PermissionScope!
+  grantedAt: DateTime
+  grantedBy: String
+}
+
+"""A label tag that can be applied to forms."""
+type Tag {
+  id: ID!
+  name: String!
+}
+
+# ─────────────────────────────────────────────
+# Queries and Mutations
+# ─────────────────────────────────────────────
+
+type Query {
+  """Retrieve a single form by ID."""
+  form(id: ID!): Form
+
+  """List all forms in the calling user's account."""
+  forms(
+    page: Int
+    pageSize: Int
+    search: String
+    workspaceId: ID
+  ): FormPage!
+
+  """Get a workspace by ID."""
+  workspace(id: ID!): Workspace
+
+  """List all workspaces accessible to the calling user."""
+  workspaces(page: Int, pageSize: Int): WorkspacePage!
+
+  """Retrieve responses for a form."""
+  responses(
+    formId: ID!
+    pageSize: Int
+    since: DateTime
+    until: DateTime
+    after: String
+    before: String
+    completedOnly: Boolean
+    sort: String
+    query: String
+    fields: [String!]
+  ): ResponsePage!
+
+  """Get all webhooks for a form."""
+  webhooks(formId: ID!): [Webhook!]!
+
+  """Get a single webhook."""
+  webhook(formId: ID!, tag: String!): Webhook
+
+  """Get a theme by ID."""
+  theme(id: ID!): Theme
+
+  """List all themes available to the calling user."""
+  themes(page: Int, pageSize: Int): ThemePage!
+
+  """Get an image by ID."""
+  image(id: ID!): Image
+
+  """Get completion statistics for a form."""
+  completion(formId: ID!): Completion
+
+  """List all API tokens for the account."""
+  apiTokens: [APIToken!]!
+}
+
+type Mutation {
+  """Create a new form."""
+  createForm(input: CreateFormInput!): Form!
+
+  """Update an existing form."""
+  updateForm(id: ID!, input: UpdateFormInput!): Form!
+
+  """Delete a form."""
+  deleteForm(id: ID!): Boolean!
+
+  """Create a new webhook for a form."""
+  createWebhook(formId: ID!, input: WebhookInput!): Webhook!
+
+  """Update a webhook."""
+  updateWebhook(formId: ID!, tag: String!, input: WebhookInput!): Webhook!
+
+  """Delete a webhook."""
+  deleteWebhook(formId: ID!, tag: String!): Boolean!
+
+  """Create a new theme."""
+  createTheme(input: ThemeInput!): Theme!
+
+  """Update a theme."""
+  updateTheme(id: ID!, input: ThemeInput!): Theme!
+
+  """Delete a theme."""
+  deleteTheme(id: ID!): Boolean!
+
+  """Upload an image."""
+  uploadImage(input: ImageInput!): Image!
+
+  """Create a new workspace."""
+  createWorkspace(name: String!): Workspace!
+
+  """Update a workspace."""
+  updateWorkspace(id: ID!, name: String!): Workspace!
+
+  """Delete a workspace."""
+  deleteWorkspace(id: ID!): Boolean!
+}
+
+# ─────────────────────────────────────────────
+# Pagination Wrappers
+# ─────────────────────────────────────────────
+
+type FormPage {
+  items: [Form!]!
+  pageCount: Int
+  totalItems: Int
+}
+
+type WorkspacePage {
+  items: [Workspace!]!
+  pageCount: Int
+  totalItems: Int
+}
+
+type ResponsePage {
+  items: [Response!]!
+  totalItems: Int
+  pageCount: Int
+}
+
+type ThemePage {
+  items: [Theme!]!
+  pageCount: Int
+  totalItems: Int
+}
+
+# ─────────────────────────────────────────────
+# Input Types
+# ─────────────────────────────────────────────
+
+input CreateFormInput {
+  title: String!
+  language: String
+  fields: [FormFieldInput!]
+  welcomeScreens: [WelcomeScreenInput!]
+  thankYouScreens: [ThankYouScreenInput!]
+  themeId: ID
+  workspaceId: ID
+  settings: AppSettingsInput
+  hidden: [String!]
+  variables: JSON
+}
+
+input UpdateFormInput {
+  title: String
+  language: String
+  fields: [FormFieldInput!]
+  welcomeScreens: [WelcomeScreenInput!]
+  thankYouScreens: [ThankYouScreenInput!]
+  themeId: ID
+  settings: AppSettingsInput
+}
+
+input FormFieldInput {
+  ref: String
+  title: String!
+  type: FieldType!
+  properties: JSON
+  validations: JSON
+}
+
+input WelcomeScreenInput {
+  ref: String
+  title: String!
+  properties: JSON
+}
+
+input ThankYouScreenInput {
+  ref: String
+  title: String!
+  properties: JSON
+}
+
+input AppSettingsInput {
+  language: String
+  showProgressBar: Boolean
+  showTypeformBranding: Boolean
+  redirectAfterSubmitUrl: String
+}
+
+input WebhookInput {
+  url: URL!
+  enabled: Boolean
+  verifySSL: Boolean
+  secret: String
+}
+
+input ThemeInput {
+  name: String!
+  colors: ThemeColorsInput
+  font: String
+  visibility: String
+}
+
+input ThemeColorsInput {
+  question: String
+  answer: String
+  button: String
+  background: String
+}
+
+input ImageInput {
+  url: URL!
+  fileName: String
+  mediaType: String
+}
