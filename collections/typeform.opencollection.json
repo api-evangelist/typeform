@@ -1,0 +1,196 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Typeform Create API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Retrieve forms",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.typeform.com/forms",
+        "params": [
+          {
+            "name": "page",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "page_size",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "search",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "workspace_id",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Retrieve forms"
+    },
+    {
+      "info": {
+        "name": "Create form",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.typeform.com/forms",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create form"
+    },
+    {
+      "info": {
+        "name": "Retrieve form",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.typeform.com/forms/:form_id",
+        "params": [
+          {
+            "name": "form_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Retrieve form"
+    },
+    {
+      "info": {
+        "name": "Update form (full replace)",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://api.typeform.com/forms/:form_id",
+        "params": [
+          {
+            "name": "form_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update form (full replace)"
+    },
+    {
+      "info": {
+        "name": "Update form (patch)",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "https://api.typeform.com/forms/:form_id",
+        "params": [
+          {
+            "name": "form_id",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Update form (patch)"
+    },
+    {
+      "info": {
+        "name": "Delete form",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.typeform.com/forms/:form_id",
+        "params": [
+          {
+            "name": "form_id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Delete form"
+    },
+    {
+      "info": {
+        "name": "Retrieve images collection",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.typeform.com/images"
+      },
+      "docs": "Retrieve images collection"
+    },
+    {
+      "info": {
+        "name": "Create image",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.typeform.com/images",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create image"
+    },
+    {
+      "info": {
+        "name": "Retrieve themes",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.typeform.com/themes"
+      },
+      "docs": "Retrieve themes"
+    },
+    {
+      "info": {
+        "name": "Create theme",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.typeform.com/themes",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create theme"
+    }
+  ],
+  "bundled": true
+}

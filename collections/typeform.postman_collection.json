@@ -1,0 +1,969 @@
+{
+  "item": [
+    {
+      "id": "ae91efe7-982a-4743-a54a-c72838795f2c",
+      "name": "Retrieve forms",
+      "request": {
+        "name": "Retrieve forms",
+        "description": {},
+        "url": {
+          "path": [
+            "forms"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "page",
+              "value": "<integer>"
+            },
+            {
+              "disabled": false,
+              "key": "page_size",
+              "value": "<integer>"
+            },
+            {
+              "disabled": false,
+              "key": "search",
+              "value": "<string>"
+            },
+            {
+              "disabled": false,
+              "key": "workspace_id",
+              "value": "<string>"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "80edabd2-7eb9-48c6-83ed-adf86fa02290",
+          "name": "List of forms",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "forms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "page_size",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "search",
+                  "value": "<string>"
+                },
+                {
+                  "key": "workspace_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"total_items\": 8222,\n  \"page_count\": 537,\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"type\": \"string\",\n      \"workspace\": {\n        \"href\": \"string\"\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"title\": \"string\",\n      \"type\": \"string\",\n      \"workspace\": {\n        \"href\": \"string\"\n      }\n    }\n  ]\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "cfd0d772-5b73-495f-bdf8-5cb4f5f43908",
+      "name": "Create form",
+      "request": {
+        "name": "Create form",
+        "description": {},
+        "url": {
+          "path": [
+            "forms"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"workspace\": {\n    \"href\": \"<string>\"\n  },\n  \"fields\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "2e409f57-486b-48da-89af-f37d385f2964",
+          "name": "Form created",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "forms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"workspace\": {\n    \"href\": \"<string>\"\n  },\n  \"fields\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"type\": \"string\",\n  \"workspace\": {\n    \"href\": \"string\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "cb15b33b-a085-43c8-9283-b1ac69d33385",
+      "name": "Retrieve form",
+      "request": {
+        "name": "Retrieve form",
+        "description": {},
+        "url": {
+          "path": [
+            "forms",
+            ":form_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "form_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "c58f5ef6-0abc-487e-b45e-7eeba0958147",
+          "name": "Form details",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "forms",
+                ":form_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "form_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": \"string\",\n  \"title\": \"string\",\n  \"type\": \"string\",\n  \"workspace\": {\n    \"href\": \"string\"\n  }\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "39ba12f1-bffe-4717-976d-e63e52c8d5f6",
+      "name": "Update form (full replace)",
+      "request": {
+        "name": "Update form (full replace)",
+        "description": {},
+        "url": {
+          "path": [
+            "forms",
+            ":form_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "form_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "PUT",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"workspace\": {\n    \"href\": \"<string>\"\n  },\n  \"fields\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "b7275133-03d2-4460-bc11-9c425561f116",
+          "name": "Form updated",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "forms",
+                ":form_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "form_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"type\": \"<string>\",\n  \"workspace\": {\n    \"href\": \"<string>\"\n  },\n  \"fields\": [\n    \"<object>\",\n    \"<object>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "42a6de28-bc7d-423e-a58b-810c4ad1834f",
+      "name": "Update form (patch)",
+      "request": {
+        "name": "Update form (patch)",
+        "description": {},
+        "url": {
+          "path": [
+            "forms",
+            ":form_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "form_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "method": "PATCH",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "376dcd22-2132-4154-b92d-a67fc03c9461",
+          "name": "Form patched",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "forms",
+                ":form_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "form_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<object>\",\n  \"<object>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "d8f0ac28-482a-4457-bae6-aa3ee09283a8",
+      "name": "Delete form",
+      "request": {
+        "name": "Delete form",
+        "description": {},
+        "url": {
+          "path": [
+            "forms",
+            ":form_id"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "form_id",
+              "description": "(Required) "
+            }
+          ]
+        },
+        "method": "DELETE",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "21af799e-cdfd-45ea-b2d6-49ad2cddf09b",
+          "name": "Form deleted",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "forms",
+                ":form_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "form_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              }
+            ],
+            "method": "DELETE",
+            "body": {}
+          },
+          "status": "No Content",
+          "code": 204,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "b5820c82-3b62-470e-94ae-3c4dc731b55a",
+      "name": "Retrieve images collection",
+      "request": {
+        "name": "Retrieve images collection",
+        "description": {},
+        "url": {
+          "path": [
+            "images"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "605d8f90-dd66-47cf-a16e-7611b0ecd0fc",
+          "name": "Image collection",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": \"string\",\n    \"file_name\": \"string\",\n    \"src\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"file_name\": \"string\",\n    \"src\": \"string\"\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "646b759e-95dc-48c8-91ce-b81d99ec693e",
+      "name": "Create image",
+      "request": {
+        "name": "Create image",
+        "description": {},
+        "url": {
+          "path": [
+            "images"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"file_name\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "59f10951-bdd9-49da-8b42-e149a2463c33",
+          "name": "Image created",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"url\": \"<string>\",\n  \"file_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": \"string\",\n  \"file_name\": \"string\",\n  \"src\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "c211c72c-4821-420f-a7d8-d835330f4c5b",
+      "name": "Retrieve themes",
+      "request": {
+        "name": "Retrieve themes",
+        "description": {},
+        "url": {
+          "path": [
+            "themes"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "7c32cfc0-885a-4f96-8ff0-dc3368adb55b",
+          "name": "Themes collection",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "themes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"background\": {},\n    \"colors\": {},\n    \"font\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"background\": {},\n    \"colors\": {},\n    \"font\": \"string\"\n  }\n]",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "ea56a1d4-74eb-42ba-a7e3-56f666000a3b",
+      "name": "Create theme",
+      "request": {
+        "name": "Create theme",
+        "description": {},
+        "url": {
+          "path": [
+            "themes"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"background\": \"<object>\",\n  \"colors\": \"<object>\",\n  \"font\": \"<string>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "5d3c3f0d-b714-4cc6-b6ce-bc7a5c6fc3cb",
+          "name": "Theme created",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "themes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: bearer",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "Bearer <token>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"background\": \"<object>\",\n  \"colors\": \"<object>\",\n  \"font\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"background\": {},\n  \"colors\": {},\n  \"font\": \"string\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.typeform.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21e3ccbd-a5a9-4054-b4e3-d16b55f39041",
+    "name": "Typeform Create API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Typeform Create API lets you programmatically manage forms, themes, and images on Typeform. Authentication is via a personal access token or an OAuth 2.0 application access token passed as a Bearer token.\n\nContact Support:\n Name: Typeform Developers",
+      "type": "text/plain"
+    }
+  }
+}
