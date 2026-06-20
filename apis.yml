@@ -8,7 +8,7 @@ description: Typeform is a conversational forms and surveys platform with branch
   access to submissions), Webhooks API and an Embed SDK — along with deep workspace
   and account endpoints. API documentation is hosted on Stoplight; a downloadable
   OpenAPI spec is not publicly available.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Forms
 - Surveys
@@ -25,7 +25,7 @@ apis:
   name: Typeform Create API
   description: REST API for creating, updating and deleting forms, themes, images
     and workspaces. Bearer-token authentication via personal access tokens.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/create/
   baseURL: https://api.typeform.com
   tags:
@@ -45,7 +45,7 @@ apis:
   name: Typeform Responses API
   description: REST API to retrieve form submissions in JSON without polling webhooks.
     Bearer-token auth.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/responses/
   baseURL: https://api.typeform.com
   tags:
@@ -59,7 +59,7 @@ apis:
   name: Typeform Webhooks API
   description: REST endpoints for managing webhooks that POST every submission to
     a configured URL.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/webhooks/
   baseURL: https://api.typeform.com
   tags:
@@ -74,7 +74,7 @@ apis:
   name: Typeform Embed SDK
   description: JavaScript embed SDK for inline / popup / fullscreen / sidetab / popover
     / slider experiences in your own website or web app. Not a REST API.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/embed/
   baseURL: https://embed.typeform.com
   tags:
