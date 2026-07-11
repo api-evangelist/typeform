@@ -1,0 +1,25 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/typeform-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Personal access token or OAuth 2.0 access token.
+  sources:
+  - openapi/typeform-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.typeform.com/oauth/authorize
+    tokenUrl: https://api.typeform.com/oauth/token
+    scopes: 6
+  sources:
+  - openapi/typeform-openapi.yml

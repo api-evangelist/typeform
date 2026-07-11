@@ -85,6 +85,8 @@ apis:
   - type: Documentation
     url: https://www.typeform.com/developers/embed/
 common:
+- type: DomainSecurity
+  url: security/typeform-domain-security.yml
 - type: Authentication
   url: authentication/typeform-authentication.yml
 - type: OAuthScopes
