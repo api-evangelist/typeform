@@ -1,0 +1,47 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/typeform-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/typeform-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.typeform.com/oauth/authorize
+    tokenUrl: https://api.typeform.com/oauth/token
+scopes:
+- scope: forms:read
+  description: Read forms
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/typeform-openapi.yml
+- scope: forms:write
+  description: Create and modify forms
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/typeform-openapi.yml
+- scope: images:read
+  description: Read images
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/typeform-openapi.yml
+- scope: images:write
+  description: Upload images
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/typeform-openapi.yml
+- scope: themes:read
+  description: Read themes
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/typeform-openapi.yml
+- scope: themes:write
+  description: Create and modify themes
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/typeform-openapi.yml

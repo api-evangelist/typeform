@@ -85,6 +85,10 @@ apis:
   - type: Documentation
     url: https://www.typeform.com/developers/embed/
 common:
+- type: Authentication
+  url: authentication/typeform-authentication.yml
+- type: OAuthScopes
+  url: scopes/typeform-scopes.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/typeform-
 - type: Website
@@ -105,6 +109,8 @@ common:
   url: finops/typeform-finops.yml
 - type: Integrations
   url: https://www.typeform.com/partners
+- url: https://www.typeform.com/blog/
+  type: Blog
 integrations:
 - name: Become an agency partner
 - name: Become a technology partner
