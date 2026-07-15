@@ -85,6 +85,8 @@ apis:
   - type: Documentation
     url: https://www.typeform.com/developers/embed/
 common:
+- type: AgenticAccess
+  url: agentic-access/typeform-agentic-access.yml
 - type: DomainSecurity
   url: security/typeform-domain-security.yml
 - type: Authentication
