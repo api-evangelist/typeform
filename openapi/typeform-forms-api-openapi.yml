@@ -1,0 +1,172 @@
+openapi: 3.1.0
+info:
+  title: Typeform Create Forms API
+  version: '1.0'
+  description: The Typeform Create API lets you programmatically manage forms, themes, and images on Typeform. Authentication is via a personal access token or an OAuth 2.0 application access token passed as a Bearer token.
+  contact:
+    name: Typeform Developers
+    url: https://www.typeform.com/developers/create/
+servers:
+- url: https://api.typeform.com
+  description: Default (US) data center
+- url: https://api.eu.typeform.com
+  description: EU data center
+security:
+- bearerAuth: []
+tags:
+- name: Forms
+paths:
+  /forms:
+    get:
+      summary: Retrieve forms
+      operationId: listForms
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+      - in: query
+        name: search
+        schema:
+          type: string
+      - in: query
+        name: workspace_id
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of forms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FormList'
+      tags:
+      - Forms
+    post:
+      summary: Create form
+      operationId: createForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form'
+      responses:
+        '201':
+          description: Form created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+      tags:
+      - Forms
+  /forms/{form_id}:
+    parameters:
+    - in: path
+      name: form_id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: Retrieve form
+      operationId: getForm
+      responses:
+        '200':
+          description: Form details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Form'
+      tags:
+      - Forms
+    put:
+      summary: Update form (full replace)
+      operationId: updateForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Form'
+      responses:
+        '200':
+          description: Form updated
+      tags:
+      - Forms
+    patch:
+      summary: Update form (patch)
+      operationId: patchForm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+      responses:
+        '200':
+          description: Form patched
+      tags:
+      - Forms
+    delete:
+      summary: Delete form
+      operationId: deleteForm
+      responses:
+        '204':
+          description: Form deleted
+      tags:
+      - Forms
+components:
+  schemas:
+    FormList:
+      type: object
+      properties:
+        total_items:
+          type: integer
+        page_count:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Form'
+    Form:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+        workspace:
+          type: object
+          properties:
+            href:
+              type: string
+        fields:
+          type: array
+          items:
+            type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token or OAuth 2.0 access token.
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.typeform.com/oauth/authorize
+          tokenUrl: https://api.typeform.com/oauth/token
+          scopes:
+            forms:read: Read forms
+            forms:write: Create and modify forms
+            images:read: Read images
+            images:write: Upload images
+            themes:read: Read themes
+            themes:write: Create and modify themes

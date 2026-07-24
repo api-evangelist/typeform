@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: Typeform Create Forms Images API
+  version: '1.0'
+  description: The Typeform Create API lets you programmatically manage forms, themes, and images on Typeform. Authentication is via a personal access token or an OAuth 2.0 application access token passed as a Bearer token.
+  contact:
+    name: Typeform Developers
+    url: https://www.typeform.com/developers/create/
+servers:
+- url: https://api.typeform.com
+  description: Default (US) data center
+- url: https://api.eu.typeform.com
+  description: EU data center
+security:
+- bearerAuth: []
+tags:
+- name: Images
+paths:
+  /images:
+    get:
+      summary: Retrieve images collection
+      operationId: listImages
+      responses:
+        '200':
+          description: Image collection
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Image'
+      tags:
+      - Images
+    post:
+      summary: Create image
+      operationId: createImage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  description: Base64-encoded image data
+                url:
+                  type: string
+                file_name:
+                  type: string
+      responses:
+        '201':
+          description: Image created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+      tags:
+      - Images
+components:
+  schemas:
+    Image:
+      type: object
+      properties:
+        id:
+          type: string
+        file_name:
+          type: string
+        src:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token or OAuth 2.0 access token.
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.typeform.com/oauth/authorize
+          tokenUrl: https://api.typeform.com/oauth/token
+          scopes:
+            forms:read: Read forms
+            forms:write: Create and modify forms
+            images:read: Read images
+            images:write: Upload images
+            themes:read: Read themes
+            themes:write: Create and modify themes

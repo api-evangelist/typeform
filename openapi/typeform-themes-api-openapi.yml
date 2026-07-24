@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: Typeform Create Forms Themes API
+  version: '1.0'
+  description: The Typeform Create API lets you programmatically manage forms, themes, and images on Typeform. Authentication is via a personal access token or an OAuth 2.0 application access token passed as a Bearer token.
+  contact:
+    name: Typeform Developers
+    url: https://www.typeform.com/developers/create/
+servers:
+- url: https://api.typeform.com
+  description: Default (US) data center
+- url: https://api.eu.typeform.com
+  description: EU data center
+security:
+- bearerAuth: []
+tags:
+- name: Themes
+paths:
+  /themes:
+    get:
+      summary: Retrieve themes
+      operationId: listThemes
+      responses:
+        '200':
+          description: Themes collection
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Theme'
+      tags:
+      - Themes
+    post:
+      summary: Create theme
+      operationId: createTheme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Theme'
+      responses:
+        '201':
+          description: Theme created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Theme'
+      tags:
+      - Themes
+components:
+  schemas:
+    Theme:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        background:
+          type: object
+        colors:
+          type: object
+        font:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Personal access token or OAuth 2.0 access token.
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.typeform.com/oauth/authorize
+          tokenUrl: https://api.typeform.com/oauth/token
+          scopes:
+            forms:read: Read forms
+            forms:write: Create and modify forms
+            images:read: Read images
+            images:write: Upload images
+            themes:read: Read themes
+            themes:write: Create and modify themes
