@@ -8,7 +8,20 @@ description: Typeform is a conversational forms and surveys platform with branch
   access to submissions), Webhooks API and an Embed SDK — along with deep workspace
   and account endpoints. API documentation is hosted on Stoplight; a downloadable
   OpenAPI spec is not publicly available.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/typeform.png
 tags:
 - Forms
 - Surveys
@@ -23,8 +36,9 @@ specificationVersion: '0.19'
 apis:
 - aid: typeform:create
   name: Typeform Create API
-  description: REST API for creating, updating and deleting forms, themes, images
-    and workspaces. Bearer-token authentication via personal access tokens.
+  description: >-
+    REST API for creating, updating and deleting forms, themes, images and workspaces. Bearer-token authentication
+    via personal access tokens.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/create/
   baseURL: https://api.typeform.com
@@ -43,8 +57,8 @@ apis:
     type: GraphQL
 - aid: typeform:responses
   name: Typeform Responses API
-  description: REST API to retrieve form submissions in JSON without polling webhooks.
-    Bearer-token auth.
+  description: >-
+    REST API to retrieve form submissions in JSON without polling webhooks. Bearer-token auth.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/responses/
   baseURL: https://api.typeform.com
@@ -57,8 +71,7 @@ apis:
     url: https://www.typeform.com/developers/responses/
 - aid: typeform:webhooks
   name: Typeform Webhooks API
-  description: REST endpoints for managing webhooks that POST every submission to
-    a configured URL.
+  description: REST endpoints for managing webhooks that POST every submission to a configured URL.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/webhooks/
   baseURL: https://api.typeform.com
@@ -72,8 +85,9 @@ apis:
     url: asyncapi/typeform-asyncapi.yml
 - aid: typeform:embed
   name: Typeform Embed SDK
-  description: JavaScript embed SDK for inline / popup / fullscreen / sidetab / popover
-    / slider experiences in your own website or web app. Not a REST API.
+  description: >-
+    JavaScript embed SDK for inline / popup / fullscreen / sidetab / popover / slider experiences in your
+    own website or web app. Not a REST API.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.typeform.com/developers/embed/
   baseURL: https://embed.typeform.com
@@ -84,6 +98,36 @@ apis:
   properties:
   - type: Documentation
     url: https://www.typeform.com/developers/embed/
+- aid: typeform:typeform-forms-api
+  name: Typeform Forms API
+  description: The Forms API from Typeform — 2 operation(s) for forms.
+  humanURL: https://www.typeform.com/developers/create/
+  baseURL: https://api.typeform.com
+  tags:
+  - Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/typeform-forms-api-openapi.yml
+- aid: typeform:typeform-images-api
+  name: Typeform Images API
+  description: The Images API from Typeform — 1 operation(s) for images.
+  humanURL: https://www.typeform.com/developers/create/
+  baseURL: https://api.typeform.com
+  tags:
+  - Images
+  properties:
+  - type: OpenAPI
+    url: openapi/typeform-images-api-openapi.yml
+- aid: typeform:typeform-themes-api
+  name: Typeform Themes API
+  description: The Themes API from Typeform — 1 operation(s) for themes.
+  humanURL: https://www.typeform.com/developers/create/
+  baseURL: https://api.typeform.com
+  tags:
+  - Themes
+  properties:
+  - type: OpenAPI
+    url: openapi/typeform-themes-api-openapi.yml
 common:
 - type: AgenticAccess
   url: agentic-access/typeform-agentic-access.yml
