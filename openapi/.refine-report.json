@@ -1,0 +1,18 @@
+{
+  "provider": "typeform",
+  "sources": [
+    "typeform-forms-api-openapi.yml",
+    "typeform-images-api-openapi.yml",
+    "typeform-themes-api-openapi.yml"
+  ],
+  "outputs": [
+    "typeform-forms-api-openapi.yml",
+    "typeform-images-api-openapi.yml",
+    "typeform-themes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
