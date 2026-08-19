@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Typeform Create Forms Images API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve images collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.typeform.com/images"
+          },
+          "docs": "Retrieve images collection"
+        },
+        {
+          "info": {
+            "name": "Create image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.typeform.com/images",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create image"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

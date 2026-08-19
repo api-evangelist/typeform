@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Typeform Create Forms Themes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Themes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve themes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.typeform.com/themes"
+          },
+          "docs": "Retrieve themes"
+        },
+        {
+          "info": {
+            "name": "Create theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.typeform.com/themes",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create theme"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
