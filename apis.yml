@@ -27,6 +27,14 @@ tags:
 - Surveys
 - Conversational
 - Lead Capture
+- Software-as-a-Service
+- Webhook
+- Embed
+tags_raw:
+- Forms
+- Surveys
+- Conversational
+- Lead Capture
 - SaaS
 - Webhooks
 - Embed
@@ -43,6 +51,12 @@ apis:
   humanURL: https://www.typeform.com/developers/create/
   baseURL: https://api.typeform.com
   tags:
+  - REST
+  - Forms
+  - Themes
+  - Image
+  - Workspaces
+  tags_raw:
   - REST
   - Forms
   - Themes
@@ -76,6 +90,9 @@ apis:
   humanURL: https://www.typeform.com/developers/webhooks/
   baseURL: https://api.typeform.com
   tags:
+  - REST
+  - Webhook
+  tags_raw:
   - REST
   - Webhooks
   properties:
@@ -114,6 +131,8 @@ apis:
   humanURL: https://www.typeform.com/developers/create/
   baseURL: https://api.typeform.com
   tags:
+  - Image
+  tags_raw:
   - Images
   properties:
   - type: OpenAPI
