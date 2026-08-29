@@ -8,6 +8,18 @@ description: Typeform is a conversational forms and surveys platform with branch
   access to submissions), Webhooks API and an Embed SDK — along with deep workspace
   and account endpoints. API documentation is hosted on Stoplight; a downloadable
   OpenAPI spec is not publicly available.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
