@@ -67,7 +67,7 @@ apis:
   - Forms
   - Themes
   - Image
-  - Workspaces
+  - Workspace
   tags_raw:
   - REST
   - Forms
