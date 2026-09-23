@@ -1,9 +1,7 @@
 {
   "provider": "typeform",
   "sources": [
-    "typeform-forms-api-openapi.yml",
-    "typeform-images-api-openapi.yml",
-    "typeform-themes-api-openapi.yml"
+    "_original/typeform-openapi.yml"
   ],
   "outputs": [
     "typeform-forms-api-openapi.yml",
@@ -13,6 +11,27 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "typeform-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "typeform-openapi.yml: tagged paths GET /forms -> Forms",
+    "typeform-openapi.yml: tagged paths POST /forms -> Forms",
+    "typeform-openapi.yml: tagged paths GET /forms/{form_id} -> Forms",
+    "typeform-openapi.yml: tagged paths PUT /forms/{form_id} -> Forms",
+    "typeform-openapi.yml: tagged paths PATCH /forms/{form_id} -> Forms",
+    "typeform-openapi.yml: tagged paths DELETE /forms/{form_id} -> Forms",
+    "typeform-openapi.yml: tagged paths GET /images -> Images",
+    "typeform-openapi.yml: tagged paths POST /images -> Images",
+    "typeform-openapi.yml: tagged paths GET /themes -> Themes",
+    "typeform-openapi.yml: tagged paths POST /themes -> Themes",
+    "typeform-openapi.yml: declared missing tag: Forms",
+    "typeform-openapi.yml: declared missing tag: Images",
+    "typeform-openapi.yml: declared missing tag: Themes",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "typeform-forms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "typeform-images-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "typeform-themes-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
