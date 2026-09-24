@@ -37,7 +37,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/typeform.p
 tags:
 - Forms
 - Surveys
-- Conversational
+- Conversational AI
 - Lead Capture
 - Software-as-a-Service
 - Webhook
@@ -79,8 +79,6 @@ apis:
     url: https://www.typeform.com/developers/create/
   - type: Reference
     url: https://www.typeform.com/developers/create/reference/
-  - url: graphql/typeform-graphql.md
-    type: GraphQL
 - aid: typeform:responses
   name: Typeform Responses API
   description: >-
