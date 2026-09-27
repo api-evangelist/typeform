@@ -37,7 +37,6 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/typeform.p
 tags:
 - Forms
 - Surveys
-- Conversational AI
 - Lead Capture
 - Software-as-a-Service
 - Webhook
@@ -45,7 +44,6 @@ tags:
 tags_raw:
 - Forms
 - Surveys
-- Conversational
 - Lead Capture
 - SaaS
 - Webhooks
@@ -195,3 +193,5 @@ integrations:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
+x-tags-removed:
+- Conversational AI
