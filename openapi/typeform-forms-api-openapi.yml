@@ -123,6 +123,17 @@ paths:
       - Forms
 components:
   schemas:
+    FormList:
+      type: object
+      properties:
+        total_items:
+          type: integer
+        page_count:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Form'
     Form:
       type: object
       properties:
@@ -141,17 +152,6 @@ components:
           type: array
           items:
             type: object
-    FormList:
-      type: object
-      properties:
-        total_items:
-          type: integer
-        page_count:
-          type: integer
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Form'
   securitySchemes:
     bearerAuth:
       type: http
